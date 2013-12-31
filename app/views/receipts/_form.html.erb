@@ -1,0 +1,29 @@
+<%= form_for(@receipt) do |f| %>
+  <% if @receipt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@receipt.errors.count, "error") %> prohibited this receipt from being saved:</h2>
+
+      <ul>
+      <% @receipt.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :food_id %><br>
+    <%= f.collection_select(:food_id, Food.all, :id, :name) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
